@@ -1,6 +1,28 @@
-import { createApp } from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
 
-createApp(App).use(store).use(router).mount("#app");
+// Vuetify
+import 'vuetify/styles';
+import { createVuetify } from 'vuetify';
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
+import '@mdi/font/css/materialdesignicons.css';
+// Components
+
+// Pinia config
+import { createPinia } from 'pinia';
+
+// Swiper config
+import 'swiper/css';
+
+// Vuetify config
+const vuetify = createVuetify({
+  components,
+  directives,
+  theme: {
+    defaultTheme: 'light',
+  },
+});
+
+createApp(App).use(vuetify).use(router).use(createPinia()).mount('#app');
