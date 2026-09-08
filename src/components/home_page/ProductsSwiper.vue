@@ -1,28 +1,18 @@
 <template>
   <section class="flash-deals py-5">
-    <v-container fluid>
-      <h2 style="font-weight: bold; color: red" class="py-5">Flash Deals</h2>
-      <v-row class="d-flex">
-        <p v-if="isLoading">Loading...</p>
-        <v-col
-          style="padding: 8px; border: 1px solid #ff6b6b; border-radius: 8px"
-          cols="3"
-          v-else
-          v-for="product in products"
-          :key="product.id"
-        >
-          <v-card>
-            <img
-              :src="
-                shownProduct[product.title]
-                  ? shownProduct[product.title]
-                  : product.thumbnail
-              "
-              :alt="product.title"
-              class="w-100"
-              style="height: 200px; object-fit: cover"
-            />
-          </v-card>
+    <Swiper>
+      <swiper-slide v-for="product in products" :key="product.id">
+        <v-card>
+          <img
+            :src="
+              shownProduct[product.title]
+                ? shownProduct[product.title]
+                : product.thumbnail
+            "
+            :alt="product.title"
+            class="w-100"
+            style="height: 200px; object-fit: cover"
+          />
           <v-card-text class="pl-0 pb-0">
             <h3>{{ product.title }}</h3>
             <v-breadcrumbs style="padding: 5px"></v-breadcrumbs>
@@ -100,13 +90,118 @@
               >Add to Cart</v-btn
             >
           </div>
+        </v-card>
+      </swiper-slide>
+    </Swiper>
+    <!-- <v-container fluid>
+      <h2 style="font-weight: bold; color: red" class="py-5">Flash Deals</h2>
+      <v-row class="d-flex">
+        <p v-if="isLoading">Loading...</p>
+        <v-col
+          style="padding: 8px; border: 1px solid #ff6b6b; border-radius: 8px"
+          cols="3"
+          v-else
+          v-for="product in products"
+          :key="product.id"
+        >
+          <v-card>
+            <img
+              :src="
+                shownProduct[product.title]
+                  ? shownProduct[product.title]
+                  : product.thumbnail
+              "
+              :alt="product.title"
+              class="w-100"
+              style="height: 200px; object-fit: cover"
+            />
+            <v-card-text class="pl-0 pb-0">
+              <h3>{{ product.title }}</h3>
+              <v-breadcrumbs style="padding: 5px"></v-breadcrumbs>
+              {{
+                product.description.split(' ').length <= 10
+                  ? product.description
+                  : product.description.split(' ').slice(0, 7).join(' ') +
+                    ' ...'
+              }}
+            </v-card-text>
+            <v-rating
+              v-model="product.rating"
+              color="yellow-darken-2"
+              background-color="grey"
+              half-increments
+              readonly
+              size="x-small"
+              density="compact"
+            ></v-rating>
+            <v-card-text
+              class="pl-0 pt-0"
+              style="font-weight: 900; color: #ff6b6b"
+            >
+              <del style="font-weight: normal; color: #888">
+                {{ product.price }}$</del
+              >
+              <span style="font-weight: normal; color: #888"> From</span>
+              {{
+                Math.ceil(
+                  product.price -
+                    product.price * (product.discountPercentage / 100),
+                )
+              }}$</v-card-text
+            >
+            <v-btn-toggle
+              v-model="shownProduct[product.title]"
+              class="thumbnail-toggle"
+              style="
+                padding: 0px;
+                height: fit-content;
+                display: flex;
+                gap: 8px;
+                align-items: center;
+              "
+              divided
+            >
+              <v-btn
+                v-for="(pic, i) in product.images"
+                :key="i"
+                :value="pic"
+                class="thumbnail-button"
+                style="
+                  border-radius: 50%;
+                  padding: 5px;
+                  width: 58px;
+                  min-width: 58px;
+                  height: 58px;
+                "
+                :aria-label="`Show ${product.title} image ${i + 1}`"
+                size="x-small"
+                ><img
+                  :src="pic"
+                  alt="product image"
+                  class="thumbnail-image"
+                  width="100%"
+                  style="border-radius: 50%"
+                  height="100%"
+                  object-fit="cover"
+              /></v-btn>
+            </v-btn-toggle>
+            <div class="d-flex justify-center" style="padding: 10px 0px">
+              <v-btn
+                class="choose-options-btn py-3 px-7"
+                variant="outlined"
+                @click="addToCart(product)"
+                >Add to Cart</v-btn
+              >
+            </div>
+          </v-card>
         </v-col>
       </v-row>
-    </v-container>
+    </v-container> -->
   </section>
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 export default {
   name: 'FlashDeals',
 
@@ -114,6 +209,10 @@ export default {
     return {
       shownProduct: {},
     };
+  },
+  components: {
+    Swiper,
+    SwiperSlide,
   },
   props: {
     products: {
