@@ -34,4 +34,7 @@ nav {
     }
   }
 }
+.v-rating__wrapper {
+  margin-right: 5px;
+}
 </style>

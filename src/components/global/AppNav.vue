@@ -77,10 +77,12 @@
                 <span>Help</span>
               </div>
               |
-              <div
-                class="help d-flex align-center"
+              <button
+                type="button"
+                class="help d-flex align-center language-btn"
                 style="gap: 5px; cursor: pointer"
                 id="language-btn"
+                aria-label="Select language and currency"
               >
                 <component :is="selectedLang.icon" />
                 <span
@@ -104,7 +106,7 @@
                     </v-list-item>
                   </v-list>
                 </v-menu>
-              </div>
+              </button>
             </v-col>
           </v-row>
         </v-row>
@@ -167,6 +169,17 @@ export default {
 #navSearch::placeholder {
   color: #000;
   opacity: 1;
+}
+.language-btn {
+  background: transparent;
+  border: none;
+  color: inherit;
+  padding: 0;
+}
+.language-btn:focus-visible {
+  outline: 2px solid #ffb547;
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 .search-icon {
   position: absolute;

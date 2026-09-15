@@ -8,7 +8,8 @@
               <h3><span>Huge saving</span> on UHD Televisions</h3>
               <p class="hint">Sale up to 70% off on selected items*</p>
               <v-btn
-                class="py-4 px-10"
+                height="50"
+                width="160"
                 density="compact"
                 variant="outlined"
                 style="border-radius: 30px; text-transform: none"
@@ -24,7 +25,7 @@
 
 <script></script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .banner {
   width: 100%;
   .parent {
@@ -40,7 +41,7 @@
         font-size: 45px;
         font-weight: 900;
         span {
-          color: rgb(45, 251, 223);
+          color: #2dfbdf;
         }
       }
       .hint {

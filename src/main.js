@@ -5,7 +5,29 @@ import router from './router';
 // Vuetify
 import 'vuetify/styles';
 import { createVuetify } from 'vuetify';
-import * as components from 'vuetify/components';
+import {
+  VAppBar,
+  VBadge,
+  VBreadcrumbs,
+  VBtn,
+  VBtnToggle,
+  VCard,
+  VCardText,
+  VCol,
+  VContainer,
+  VHover,
+  VIcon,
+  VLayout,
+  VList,
+  VListItem,
+  VListItemTitle,
+  VMain,
+  VMenu,
+  VNavigationDrawer,
+  VRating,
+  VRow,
+  VSkeletonLoader,
+} from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import '@mdi/font/css/materialdesignicons.css';
 // Components
@@ -15,10 +37,34 @@ import { createPinia } from 'pinia';
 
 // Swiper config
 import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 // Vuetify config
 const vuetify = createVuetify({
-  components,
+  components: {
+    VAppBar,
+    VBadge,
+    VBreadcrumbs,
+    VBtn,
+    VBtnToggle,
+    VCard,
+    VCardText,
+    VCol,
+    VContainer,
+    VHover,
+    VIcon,
+    VLayout,
+    VList,
+    VListItem,
+    VListItemTitle,
+    VMain,
+    VMenu,
+    VNavigationDrawer,
+    VRating,
+    VRow,
+    VSkeletonLoader,
+  },
   directives,
   theme: {
     defaultTheme: 'light',
