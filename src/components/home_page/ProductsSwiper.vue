@@ -181,7 +181,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .thumbnail-button.v-btn--:hover {
   border: 2px solid #c43f3f !important;
 }

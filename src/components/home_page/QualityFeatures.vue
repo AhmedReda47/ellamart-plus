@@ -12,8 +12,12 @@
               :color="isHovering ? 'blue-lighten-4' : 'white'"
               style="cursor: pointer"
             >
-              <div class="parent">
-                <img :src="feature.img" :alt="feature.title" />
+              <div class="parent d-flex flex-column align-center">
+                <img
+                  style="width: 80px; margin-bottom: 20px"
+                  :src="feature.img"
+                  :alt="feature.title"
+                />
                 <v-card-title
                   style="
                     font-weight: 700;
