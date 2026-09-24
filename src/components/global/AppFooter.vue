@@ -14,26 +14,18 @@
                 "
                 >Shop</v-card-title
               >
-              <v-card-text class="pb-0 pt-3" style="color: rgb(71, 71, 71)"
-                >Electronics</v-card-text
-              >
-              <v-card-text class="pb-0 pt-3" style="color: rgb(71, 71, 71)"
-                >Computers & Laptops</v-card-text
-              >
-              <v-card-text class="pb-0 pt-3" style="color: rgb(71, 71, 71)"
-                >SmartPhones & Tablets</v-card-text
-              >
-              <v-card-text class="pb-0 pt-3" style="color: rgb(71, 71, 71)"
-                >Cameras</v-card-text
-              >
-              <v-card-text class="pb-0 pt-3" style="color: rgb(71, 71, 71)"
-                >Video Games & Systems</v-card-text
-              >
-              <v-card-text class="pb-0 pt-3" style="color: rgb(71, 71, 71)"
-                >Home Furniture</v-card-text
-              >
-              <v-card-text class="pb-0 pt-3" style="color: rgb(71, 71, 71)"
-                >Weekly Special</v-card-text
+              <v-card-text
+                v-for="category in categories"
+                :key="category.title"
+                class="pb-0 pt-3"
+                style="color: rgb(71, 71, 71)"
+                ><router-link
+                  :to="{
+                    name: 'products_category',
+                    params: { category: category.route, title: category.title },
+                  }"
+                  >{{ category.title }}</router-link
+                ></v-card-text
               >
             </v-card>
           </v-col>
@@ -107,7 +99,9 @@
           </v-col>
           <v-col cols="3">
             <v-card elevation="0" color="transparent">
-              <img src="@/assets/images/ellamart-logo-2.png" />
+              <router-link to="/"
+                ><img src="@/assets/images/ellamart-logo-2.png"
+              /></router-link>
               <v-card-text class="px-0">
                 <LocationIcon /> 685 Market Street San Francisco, CA 94105,
                 US</v-card-text
@@ -150,6 +144,8 @@
   </div>
 </template>
 <script>
+import { useProductStore } from '@/stores/productStore.js';
+import { mapState } from 'pinia';
 import LocationIcon from '../icons/LocationIcon.vue';
 import PhoneIcon from '../icons/PhoneIcon.vue';
 import EmailIcon from '../icons/EmailIcon.vue';
@@ -182,6 +178,9 @@ export default {
     PaypalIcon,
     Visa2Icon,
     DiscoverIcon,
+  },
+  computed: {
+    ...mapState(useProductStore, ['categories']),
   },
 };
 </script>

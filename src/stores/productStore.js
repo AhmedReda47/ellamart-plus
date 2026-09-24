@@ -1,12 +1,51 @@
 import { defineStore } from 'pinia';
-import { getProductsByCategory, getProducts } from '@/services/productService';
+import {
+  // getCategories,
+  getProductsByCategory,
+  getProducts,
+} from '@/services/productService';
 export const useProductStore = defineStore('products', {
   state: () => ({
     products: [],
+    categoryProducts: [],
     laptops: [],
     smartPhones: [],
     fragrances: [],
     groceries: [],
+    categories: [
+      {
+        title: 'Smart Phones',
+        route: 'smartphones',
+      },
+      {
+        title: 'Laptops',
+        route: 'laptops',
+      },
+      {
+        title: 'Furniture',
+        route: 'furniture',
+      },
+      {
+        title: 'Mens Shoes',
+        route: 'mens-shoes',
+      },
+      {
+        title: 'Mens Watches',
+        route: 'mens-watches',
+      },
+      {
+        title: 'Womens Bags',
+        route: 'womens-bags',
+      },
+      {
+        title: 'Womens Jewellery',
+        route: 'womens-jewellery',
+      },
+      {
+        title: 'Motorcycle',
+        route: 'motorcycle',
+      },
+    ],
     isLoading: false,
     error: null,
   }),
@@ -66,10 +105,35 @@ export const useProductStore = defineStore('products', {
         const response = await getProductsByCategory('groceries');
         this.groceries = response.data.products;
       } catch (error) {
-        this.error = this.error.message || 'Failed to fetch groceries';
+        this.error = error.message || 'Failed to fetch groceries';
+      } finally {
+        this.isLoading = false;
+      }
+    },
+    async fetchProductsByCategory(category) {
+      this.isLoading = true;
+      this.error = null;
+
+      try {
+        const response = await getProductsByCategory(category);
+
+        this.categoryProducts = response.data.products;
+      } catch (error) {
+        this.error = error.message || 'Failed to fetch products by category';
       } finally {
         this.isLoading = false;
       }
     },
   },
+  // async fetchCategories() {
+  //   this.isLoading = true;
+  //   this.error = null;
+  //   try {
+  //     const response = await getCategories();
+  //   } catch (error) {
+  //     this.error = this.error.message || 'Failed to fetch groceries';
+  //   } finally {
+  //     this.isLoading = false;
+  //   }
+  // },
 });

@@ -4,11 +4,13 @@
       <v-container fluid>
         <v-row class="d-flex align-center px-5">
           <v-col cols="3">
-            <img
-              src="@/assets/images/ellamart-logo.png"
-              alt="logo Image"
-              class="w-50"
-            />
+            <router-link to="/">
+              <img
+                src="@/assets/images/ellamart-logo.png"
+                alt="logo Image"
+                class="w-50"
+              />
+            </router-link>
           </v-col>
           <v-col cols="4">
             <div class="position-relative">
@@ -58,20 +60,27 @@
             </div>
           </v-col>
           <v-row class="mt-6 pb-5 px-5">
-            <v-col cols="5">
+            <v-col cols="8">
               <ul
                 class="links d-flex text-white justify-space-between"
                 style="list-style: none"
               >
-                <li>Them Demo</li>
-                <li>Shop</li>
-                <li>Product</li>
-                <li>New In</li>
-                <li>Must Have</li>
-                <li>Collections</li>
+                <li v-for="category in categories" :key="category.title">
+                  <router-link
+                    :to="{
+                      name: 'products_category',
+                      params: {
+                        category: category.route,
+                        title: category.title,
+                      },
+                    }"
+                    style="color: white; text-decoration: none"
+                    >{{ category.title }}</router-link
+                  >
+                </li>
               </ul>
             </v-col>
-            <v-col cols="7" class="d-flex justify-end" style="gap: 35px">
+            <v-col cols="4" class="d-flex justify-end" style="gap: 35px">
               <div class="help d-flex align-center" style="gap: 5px">
                 <HelpIcon />
                 <span>Help</span>
@@ -117,6 +126,7 @@
 </template>
 <script>
 import { useCartStore } from '@/stores/cartStore';
+import { useProductStore } from '@/stores/productStore';
 import { markRaw } from 'vue';
 import HeartIcon from '@/components/icons/HeartIcon.vue';
 import AccountIcon from '@/components/icons/AccountIcon.vue';
@@ -125,6 +135,7 @@ import HelpIcon from '@/components/icons/HelpIcon.vue';
 import LangIcon from '@/components/icons/LangIcon.vue';
 import LangIcon2 from '@/components/icons/LangIcon2.vue';
 import SearchIcon from '@/components/icons/SearchIcon.vue';
+import { mapState } from 'pinia';
 export default {
   data: () => ({
     selectedLang: {
@@ -159,6 +170,9 @@ export default {
       const cartStore = useCartStore();
       cartStore.toggleCart();
     },
+  },
+  computed: {
+    ...mapState(useProductStore, ['categories']),
   },
 };
 </script>
