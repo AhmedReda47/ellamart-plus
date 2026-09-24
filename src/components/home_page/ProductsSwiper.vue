@@ -33,7 +33,14 @@
       class="pb-15 px-5"
     >
       <swiper-slide v-for="product in products" :key="product.id">
-        <v-card>
+        <v-card
+          @click="
+            $router.push({
+              name: 'products_details',
+              params: { productId: product.id },
+            })
+          "
+        >
           <v-hover v-slot="{ isHovering, props }">
             <div class="img-parent" style="height: 200px; overflow: hidden">
               <img
@@ -139,6 +146,7 @@
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 import { Pagination, Navigation } from 'swiper';
+// import { create } from 'core-js/core/object';
 export default {
   name: 'FlashDeals',
 

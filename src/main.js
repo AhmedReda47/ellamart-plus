@@ -27,6 +27,8 @@ import {
   VRating,
   VRow,
   VSkeletonLoader,
+  VTabs,
+  VTab,
 } from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import '@mdi/font/css/materialdesignicons.css';
@@ -64,6 +66,8 @@ const vuetify = createVuetify({
     VRating,
     VRow,
     VSkeletonLoader,
+    VTabs,
+    VTab,
   },
   directives,
   theme: {

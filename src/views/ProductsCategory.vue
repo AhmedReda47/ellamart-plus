@@ -22,7 +22,16 @@
               v-for="product in categoryProducts"
               :key="product.id"
             >
-              <v-card elevation="0" class="pb-5">
+              <v-card
+                elevation="0"
+                class="pb-5"
+                @click="
+                  $router.push({
+                    name: 'products_details',
+                    params: { productId: product.id },
+                  })
+                "
+              >
                 <v-hover v-slot="{ isHovering, props }">
                   <div
                     class="img-parent"

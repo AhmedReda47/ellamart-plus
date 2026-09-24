@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import {
-  // getCategories,
+  getProductById,
   getProductsByCategory,
   getProducts,
 } from '@/services/productService';
@@ -46,6 +46,7 @@ export const useProductStore = defineStore('products', {
         route: 'motorcycle',
       },
     ],
+    singleProduct: {},
     isLoading: false,
     error: null,
   }),
@@ -124,16 +125,18 @@ export const useProductStore = defineStore('products', {
         this.isLoading = false;
       }
     },
+    async fetchProductById(productId) {
+      this.isLoading = true;
+      this.error = null;
+      this.singleProduct = null;
+      try {
+        const response = await getProductById(productId);
+        this.singleProduct = response.data;
+      } catch (error) {
+        this.error = error.message || 'Failed to fetch single product';
+      } finally {
+        this.isLoading = false;
+      }
+    },
   },
-  // async fetchCategories() {
-  //   this.isLoading = true;
-  //   this.error = null;
-  //   try {
-  //     const response = await getCategories();
-  //   } catch (error) {
-  //     this.error = this.error.message || 'Failed to fetch groceries';
-  //   } finally {
-  //     this.isLoading = false;
-  //   }
-  // },
 });
