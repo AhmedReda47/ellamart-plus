@@ -7,7 +7,7 @@
 
 <script>
 import AppLayout from '@/components/global/AppLayout.vue';
-import QuickView from '@/components/home_page/QuickView.vue';
+import QuickView from '@/components/global/QuickView.vue';
 export default {
   components: {
     AppLayout,

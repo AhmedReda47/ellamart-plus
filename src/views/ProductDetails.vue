@@ -143,6 +143,7 @@
                   color: white;
                 "
                 class="mt-10 w-75 rounded-pill"
+                @click.stop="addToCart(singleProduct)"
                 >Add To Cart</v-btn
               >
             </v-card-actions>
@@ -155,6 +156,7 @@
 
 <script>
 import { useProductStore } from '@/stores/productStore';
+import { useCartStore } from '@/stores/cartStore';
 import { mapActions, mapState } from 'pinia';
 export default {
   computed: {
@@ -162,6 +164,11 @@ export default {
   },
   methods: {
     ...mapActions(useProductStore, ['fetchProductById']),
+    addToCart(product) {
+      const cartStore = useCartStore();
+      cartStore.addToCart({ ...product, quantity: this.quantity });
+      cartStore.openCart();
+    },
   },
   async mounted() {
     this.loading = true;

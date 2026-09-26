@@ -16,7 +16,15 @@ export const useCartStore = defineStore('cart', {
       this.drawer = !this.drawer;
     },
     addToCart(product) {
-      this.items.push(product);
+      const existingItem = this.items.find((item) => item.id === product.id);
+      if (existingItem) {
+        existingItem.quantity += product.quantity;
+      } else {
+        this.items.push(product);
+      }
+    },
+    deleteFormCart(productId) {
+      this.items = this.items.filter((item) => item.id !== productId);
     },
   },
 });

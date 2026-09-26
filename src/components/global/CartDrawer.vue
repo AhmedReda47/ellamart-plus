@@ -29,6 +29,8 @@
                 }}$
               </span>
             </p>
+            <span>{{ item.quantity }}</span>
+            <v-btn @click="deleteFromCart(item.id)"> Delete </v-btn>
           </div>
         </div>
       </div>
@@ -68,6 +70,10 @@ export default {
     closeCart() {
       const cartStore = useCartStore();
       cartStore.closeCart();
+    },
+    deleteFromCart(productId) {
+      const cartStore = useCartStore();
+      cartStore.deleteFormCart(productId);
     },
   },
 };
