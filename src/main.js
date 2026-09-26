@@ -29,6 +29,7 @@ import {
   VSkeletonLoader,
   VTabs,
   VTab,
+  VDialog,
 } from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import '@mdi/font/css/materialdesignicons.css';
@@ -68,6 +69,7 @@ const vuetify = createVuetify({
     VSkeletonLoader,
     VTabs,
     VTab,
+    VDialog,
   },
   directives,
   theme: {

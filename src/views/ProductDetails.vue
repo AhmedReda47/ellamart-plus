@@ -119,6 +119,18 @@
               />
               <v-icon @click="quantity++" size="20">mdi-plus</v-icon>
             </div>
+            <v-card-text class="pl-0"
+              >Subtotal:
+              <span style="font-weight: 900; color: #4b5563"
+                >{{
+                  Math.ceil(
+                    singleProduct.price -
+                      singleProduct.price *
+                        (singleProduct.discountPercentage / 100),
+                  ) * quantity
+                }}$</span
+              >
+            </v-card-text>
             <v-card-actions class="w-100 px-0">
               <v-btn
                 variant="outlined"

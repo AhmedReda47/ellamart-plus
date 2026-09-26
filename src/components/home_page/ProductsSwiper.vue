@@ -42,7 +42,10 @@
           "
         >
           <v-hover v-slot="{ isHovering, props }">
-            <div class="img-parent" style="height: 200px; overflow: hidden">
+            <div
+              class="img-parent"
+              style="height: 200px; overflow: hidden; position: relative"
+            >
               <img
                 :src="
                   shownProduct[product.title]
@@ -56,6 +59,26 @@
                 }; cursor: pointer`"
                 v-bind="props"
               />
+              <v-btn
+                density="compact"
+                width="60"
+                height="30"
+                variant="outlined"
+                class="bg-white quick-view-btn"
+                style="
+                  text-transform: none;
+                  position: absolute;
+                  left: 50%;
+                  top: 50%;
+                  transform: translate(-50%, -50%);
+                  border-radius: 30px;
+                  font-size: 12px;
+                  transition: 0.2 all ease-in-out;
+                  opacity: 0;
+                "
+                @click.stop="openQuickView(product)"
+                >Quick View</v-btn
+              >
             </div>
           </v-hover>
           <v-card-text class="ml-2 pl-0 pb-0">
@@ -129,12 +152,23 @@
                 object-fit="cover"
             /></v-btn>
           </v-btn-toggle>
-          <div class="d-flex justify-center pl-2" style="padding: 10px 0px">
+          <div class="d-flex justify-space-between" style="padding: 10px 0px">
+            <v-btn
+              class="add-to-cart-btn px-1"
+              variant="outlined"
+              @click.stop="addToCart(product)"
+              >Add to Cart</v-btn
+            >
             <v-btn
               class="choose-options-btn px-1"
               variant="outlined"
-              @click="addToCart(product)"
-              >Add to Cart</v-btn
+              @click="
+                $router.push({
+                  name: 'products_details',
+                  params: { productId: product.id },
+                })
+              "
+              >Choose Options</v-btn
             >
           </div>
         </v-card>
@@ -146,10 +180,10 @@
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 import { Pagination, Navigation } from 'swiper';
-// import { create } from 'core-js/core/object';
+import { mapActions } from 'pinia';
+import { useProductStore } from '@/stores/productStore';
 export default {
   name: 'FlashDeals',
-
   data() {
     return {
       shownProduct: {},
@@ -185,6 +219,7 @@ export default {
     addToCart(product) {
       this.$emit('add-to-cart', product);
     },
+    ...mapActions(useProductStore, ['openQuickView']),
   },
 };
 </script>
@@ -214,7 +249,7 @@ h3:hover::after {
   transition: width 0.3s ease-in-out;
 }
 
-.choose-options-btn {
+.add-to-cart-btn {
   color: #b53232 !important;
   background-color: rgba(197, 60, 60, 0.06) !important;
   border: 1px solid #b53232 !important;
@@ -224,14 +259,33 @@ h3:hover::after {
   letter-spacing: 0.2px;
   transition: all 0.25s ease;
   box-shadow: none;
-  width: 90%;
+  width: 45%;
+}
+.choose-options-btn {
+  color: #070707 !important;
+  background-color: rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid #141414 !important;
+  border-radius: 999px !important;
+  text-transform: none !important;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  transition: all 0.25s ease;
+  box-shadow: none;
+  width: 45%;
 }
 
-.choose-options-btn:hover {
+.add-to-cart-btn:hover {
   background: linear-gradient(135deg, #b53232, #d85757) !important;
   color: #ffffff !important;
   border-color: #b53232 !important;
   box-shadow: 0 10px 22px rgba(181, 50, 50, 0.22);
+  transform: translateY(-1px);
+}
+.choose-options-btn:hover {
+  background: linear-gradient(135deg, #0a0a0a, #181717) !important;
+  color: #ffffff !important;
+  border-color: #050505 !important;
+  box-shadow: 0 10px 22px rgba(46, 45, 45, 0.22);
   transform: translateY(-1px);
 }
 
@@ -259,6 +313,11 @@ h3:hover::after {
   }
   .swiper-pagination-bullet-active {
     background-color: #c43f3f;
+  }
+}
+.img-parent:hover {
+  .quick-view-btn {
+    opacity: 1 !important;
   }
 }
 </style>

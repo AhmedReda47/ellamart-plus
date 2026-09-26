@@ -35,7 +35,7 @@
                 <v-hover v-slot="{ isHovering, props }">
                   <div
                     class="img-parent"
-                    style="height: 200px; overflow: hidden"
+                    style="height: 200px; overflow: hidden; position: relative"
                   >
                     <img
                       :src="
@@ -50,6 +50,26 @@
                       }; cursor: pointer`"
                       v-bind="props"
                     />
+                    <v-btn
+                      density="compact"
+                      width="80"
+                      height="30"
+                      variant="outlined"
+                      class="bg-white quick-view-btn"
+                      style="
+                        text-transform: none;
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                        border-radius: 30px;
+                        font-size: 12px;
+                        transition: 0.2 all ease-in-out;
+                        opacity: 0;
+                      "
+                      @click.stop="openQuickView(product)"
+                      >Quick View</v-btn
+                    >
                   </div>
                 </v-hover>
                 <v-card-text class="ml-2 pl-0 pb-0">
@@ -125,14 +145,25 @@
                   /></v-btn>
                 </v-btn-toggle>
                 <div
-                  class="d-flex justify-center pl-2"
+                  class="d-flex justify-space-between"
                   style="padding: 10px 0px"
                 >
                   <v-btn
-                    class="choose-options-btn px-1"
+                    class="add-to-cart-btn px-1"
                     variant="outlined"
                     @click="addToCart(product)"
                     >Add to Cart</v-btn
+                  >
+                  <v-btn
+                    class="choose-options-btn px-1"
+                    variant="outlined"
+                    @click="
+                      $router.push({
+                        name: 'products_details',
+                        params: { productId: product.id },
+                      })
+                    "
+                    >Choose Options</v-btn
                   >
                 </div>
               </v-card>
@@ -155,7 +186,10 @@ export default {
     loading: false,
   }),
   methods: {
-    ...mapActions(useProductStore, ['fetchProductsByCategory']),
+    ...mapActions(useProductStore, [
+      'fetchProductsByCategory',
+      'openQuickView',
+    ]),
     addToCart(product) {
       const cartStore = useCartStore();
       cartStore.addToCart(product);
@@ -179,5 +213,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

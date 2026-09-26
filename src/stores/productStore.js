@@ -47,6 +47,8 @@ export const useProductStore = defineStore('products', {
       },
     ],
     singleProduct: {},
+    quickViewProduct: null,
+    isQuickViewOpen: false,
     isLoading: false,
     error: null,
   }),
@@ -137,6 +139,15 @@ export const useProductStore = defineStore('products', {
       } finally {
         this.isLoading = false;
       }
+    },
+    openQuickView(product) {
+      this.quickViewProduct = product;
+      this.isQuickViewOpen = true;
+    },
+
+    closeQuickView() {
+      this.isQuickViewOpen = false;
+      this.quickViewProduct = null;
     },
   },
 });
