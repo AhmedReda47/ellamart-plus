@@ -210,9 +210,6 @@ export default {
   },
   methods: {
     ...mapActions(useProductStore, ['closeQuickView']),
-    showMsg(product) {
-      this.$emit('show-msg', product);
-    },
     addToCart(product) {
       const cartStore = useCartStore();
       const notificationStore = useNotificationStore();

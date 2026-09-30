@@ -3,12 +3,7 @@
     <h1 class="text-center">{{ $route.params.title }}</h1>
     <v-container>
       <v-lazy>
-        <v-card
-          elevation="0"
-          :loading="loading"
-          class="pt-5"
-          min-height="700px"
-        >
+        <v-card elevation="0" class="pt-5" min-height="700px">
           <v-row v-if="loading">
             <v-col cols="3" v-for="num in 4" :key="num">
               <v-skeleton-loader
@@ -148,12 +143,12 @@
                   class="d-flex justify-space-between"
                   style="padding: 10px 0px"
                 >
-                  <v-btn
+                  <!-- <v-btn
                     class="add-to-cart-btn px-1"
                     variant="outlined"
                     @click="addToCart(product)"
                     >Add to Cart</v-btn
-                  >
+                  > -->
                   <v-btn
                     class="choose-options-btn px-1"
                     variant="outlined"

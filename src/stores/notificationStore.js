@@ -16,6 +16,7 @@ export const useNotificationStore = defineStore('notification', {
 
     closeMessage() {
       this.show = false;
+      console.log('eeeee');
     },
   },
 });

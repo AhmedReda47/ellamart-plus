@@ -32,6 +32,14 @@
         >
         <div class="bar-parent mt-5 position-relative" v-if="items.length">
           <CartTrack
+            :fill="
+              parseInt((calcTotalPrice / 10000) * 100) < 50
+                ? '#F44336'
+                : parseInt((calcTotalPrice / 10000) * 100) > 50 &&
+                  parseInt((calcTotalPrice / 10000) * 100) < 100
+                ? '#FF9800'
+                : '#4cAF50'
+            "
             :style="`
               position: absolute;
               bottom: 10%;
@@ -45,7 +53,14 @@
             `"
           />
           <v-progress-linear
-            color="red"
+            :color="
+              parseInt((calcTotalPrice / 10000) * 100) < 50
+                ? 'red'
+                : parseInt((calcTotalPrice / 10000) * 100) > 50 &&
+                  parseInt((calcTotalPrice / 10000) * 100) < 100
+                ? 'orange'
+                : 'green'
+            "
             height="7"
             :model-value="
               parseInt((calcTotalPrice / 10000) * 100) <= 100
@@ -210,6 +225,7 @@
             elevation="0"
             color="blue"
             height="45"
+            @click="$router.push({ name: 'cart_page' })"
             >View Cart</v-btn
           >
         </v-card-actions>
@@ -229,10 +245,6 @@ export default {
     CartTrack,
   },
   computed: {
-    // items() {
-    //   const cartStore = useCartStore();
-    //   return cartStore.items;
-    // },
     ...mapState(useCartStore, ['items']),
     drawer: {
       get() {

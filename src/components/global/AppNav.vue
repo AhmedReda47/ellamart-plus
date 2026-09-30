@@ -43,7 +43,9 @@
               </div>
               <div
                 class="whishlists d-flex flex-column align-center"
-                style="cursor: pointer"
+                :style="`cursor: pointer; pointer-events: ${
+                  $route.name == 'cart_page' ? 'none' : 'unset'
+                }`"
                 @click="openCart"
               >
                 <v-badge

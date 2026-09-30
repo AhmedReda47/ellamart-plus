@@ -172,9 +172,6 @@ export default {
   },
   methods: {
     ...mapActions(useProductStore, ['fetchProductById']),
-    showMsg(product) {
-      this.$emit('show-msg', product);
-    },
     addToCart(product) {
       const cartStore = useCartStore();
       const notificationStore = useNotificationStore();

@@ -32,6 +32,8 @@ import {
   VDialog,
   VProgressLinear,
   VSnackbar,
+  VDivider,
+  VCardActions,
 } from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import '@mdi/font/css/materialdesignicons.css';
@@ -74,6 +76,8 @@ const vuetify = createVuetify({
     VDialog,
     VProgressLinear,
     VSnackbar,
+    VDivider,
+    VCardActions,
   },
   directives,
   theme: {

@@ -152,16 +152,17 @@
                 object-fit="cover"
             /></v-btn>
           </v-btn-toggle>
-          <div class="d-flex justify-space-between" style="padding: 10px 0px">
-            <v-btn
+          <div style="padding: 10px 10px">
+            <!-- <v-btn
               class="add-to-cart-btn px-1"
               variant="outlined"
               @click.stop="addToCart(product)"
               >Add to Cart</v-btn
-            >
+            > -->
             <v-btn
               class="choose-options-btn px-1"
               variant="outlined"
+              style=""
               @click="
                 $router.push({
                   name: 'products_details',
@@ -249,18 +250,18 @@ h3:hover::after {
   transition: width 0.3s ease-in-out;
 }
 
-.add-to-cart-btn {
-  color: #b53232 !important;
-  background-color: rgba(197, 60, 60, 0.06) !important;
-  border: 1px solid #b53232 !important;
-  border-radius: 999px !important;
-  text-transform: none !important;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  transition: all 0.25s ease;
-  box-shadow: none;
-  width: 45%;
-}
+// .add-to-cart-btn {
+//   color: #b53232 !important;
+//   background-color: rgba(197, 60, 60, 0.06) !important;
+//   border: 1px solid #b53232 !important;
+//   border-radius: 999px !important;
+//   text-transform: none !important;
+//   font-weight: 600;
+//   letter-spacing: 0.2px;
+//   transition: all 0.25s ease;
+//   box-shadow: none;
+//   width: 45%;
+// }
 .choose-options-btn {
   color: #070707 !important;
   background-color: rgba(0, 0, 0, 0.06) !important;
@@ -271,7 +272,7 @@ h3:hover::after {
   letter-spacing: 0.2px;
   transition: all 0.25s ease;
   box-shadow: none;
-  width: 45%;
+  width: 100%;
 }
 
 .add-to-cart-btn:hover {
