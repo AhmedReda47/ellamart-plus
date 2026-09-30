@@ -181,6 +181,7 @@
                   "
                   class="mt-10 w-75 rounded-pill"
                   @click.stop="addToCart(quickViewProduct)"
+                  :loading="btnLoading"
                   >Add To Cart</v-btn
                 >
               </v-card-actions>
@@ -195,17 +196,36 @@
 <script>
 import { useProductStore } from '@/stores/productStore';
 import { useCartStore } from '@/stores/cartStore';
+import { useNotificationStore } from '@/stores/notificationStore';
 import { mapActions, mapState } from 'pinia';
 export default {
+  data: () => ({
+    tab: '',
+    quantity: 1,
+    loading: false,
+    btnLoading: false,
+  }),
   computed: {
     ...mapState(useProductStore, ['quickViewProduct', 'isQuickViewOpen']),
   },
   methods: {
     ...mapActions(useProductStore, ['closeQuickView']),
+    showMsg(product) {
+      this.$emit('show-msg', product);
+    },
     addToCart(product) {
       const cartStore = useCartStore();
-      cartStore.addToCart({ ...product, quantity: this.quantity });
-      cartStore.openCart();
+      const notificationStore = useNotificationStore();
+      this.btnLoading = true;
+      setTimeout(() => {
+        this.btnLoading = false;
+        cartStore.addToCart({ ...product, quantity: this.quantity });
+        notificationStore.showMessage(
+          `${product.title} has been added to your cart successfully!`,
+        );
+        this.closeQuickView();
+        cartStore.openCart();
+      }, 1000);
     },
   },
   watch: {
@@ -220,11 +240,6 @@ export default {
       }, 900);
     },
   },
-  data: () => ({
-    tab: '',
-    quantity: 1,
-    loading: false,
-  }),
 };
 </script>
 

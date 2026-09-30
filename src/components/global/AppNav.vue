@@ -47,8 +47,9 @@
                 @click="openCart"
               >
                 <v-badge
+                  v-if="items.length"
                   location="right- top"
-                  content="2"
+                  :content="items.length"
                   color="#205dc2"
                   offsetX="-14"
                   style="z-index: 10"
@@ -173,6 +174,7 @@ export default {
   },
   computed: {
     ...mapState(useProductStore, ['categories']),
+    ...mapState(useCartStore, ['items']),
   },
 };
 </script>
